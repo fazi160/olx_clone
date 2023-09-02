@@ -114,6 +114,7 @@
 
 .loginPage a{
   text-decoration: none;
+  color: black;
 }
 
 .sellMenu {
@@ -136,13 +137,7 @@
 .sellMenu .right {
   fill: #3a77ff;
 }
-.sellMenu {
-  position: relative;
-  cursor: pointer;
-  margin-left: 10px; /* Adjust this margin to control the spacing between elements */
-}
 .sellMenu .sellMenuContent {
-  
   display: flex;
   position: absolute;
   top: 50%;
@@ -154,10 +149,9 @@
   color: #002f34;
 }
 
-.sellMenu .sellMenuContent svg {
+/* .sellMenu .sellMenuContent svg {
   align-items: center;
-  margin-left: -5px;
-}
+} */
 .sellMenu .sellMenuContent span {
   margin-left: 5px;
 }
