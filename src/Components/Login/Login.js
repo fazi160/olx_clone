@@ -1,14 +1,31 @@
-import React from 'react';
-
+import React, { useContext, useState } from 'react';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import FirebaseContext from '../../store/FirebaseContext';
 import Logo from '../../olx-logo.png';
 import './Login.css';
 
-function Login() {
+function Login  () {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  const {app} = useContext(FirebaseContext)
+  const handleLogin=(e)=>{
+    e.preventDefault()
+    const auth = getAuth(app);
+    signInWithEmailAndPassword(auth, email, password)
+    .then(()=>{
+      navigate('/')
+    }).catch((error)=>{
+      alert(error.message)
+    });
+  }
+
   return (
     <div>
       <div className="loginParentDiv">
         <img width="200px" height="200px" src={Logo}></img>
-        <form>
+        <form onSubmit={handleLogin}>
           <label htmlFor="fname">Email</label>
           <br />
           <input
@@ -16,7 +33,8 @@ function Login() {
             type="email"
             id="fname"
             name="email"
-            defaultValue="John"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
           />
           <br />
           <label htmlFor="lname">Password</label>
@@ -26,15 +44,18 @@ function Login() {
             type="password"
             id="lname"
             name="password"
-            defaultValue="Doe"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
           />
           <br />
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        
       </div>
+      <Link to='/signup'>Signup</Link>  
     </div>
+    
   );
 }
 
